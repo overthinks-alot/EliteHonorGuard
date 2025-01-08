@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Elite Honor Guard Database</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Elite Honor Guard Database</h1>
+        </div>
+
+        <div class="punishment-form">
+            <h2>Add New Punishment</h2>
+            <form id="punishmentForm">
+                <input type="text" id="player_name" placeholder="Player Name" required>
+                <select id="punishment_type" required>
+                    <option value="Warning">Warning</option>
+                    <option value="Strike">Strike</option>
+                    <option value="Termination">Termination</option>
+                </select>
+                <textarea id="reason" placeholder="Reason" required></textarea>
+                <input type="text" id="staff_member" placeholder="Staff Member Name" required>
+                <button type="button" onclick="submitPunishment()">Submit Punishment</button>
+            </form>
+        </div>
+
+        <div class="punishment-list">
+            <h2>Punishment History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Player Name</th>
+                        <th>Type</th>
+                        <th>Reason</th>
+                        <th>Staff Member</th>
+                    </tr>
+                </thead>
+                <tbody id="punishmentsList">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // Store punishments in localStorage
+        let punishments = JSON.parse(localStorage.getItem('punishments') || '[]');
+
+        function submitPunishment() {
+            const playerName = document.getElementById('player_name').value;
+            const punishmentType = document.getElementById('punishment_type').value;
+            const reason = document.getElementById('reason').value;
+            const staffMember = document.getElementById('staff_member').value;
+
+            const punishment = {
+                created_at: new Date().toISOString(),
+                player_name: playerName,
+                punishment_type: punishmentType,
+                reason: reason,
+                staff_member: staffMember
+            };
+
+            punishments.unshift(punishment); // Add to beginning of array
+            localStorage.setItem('punishments', JSON.stringify(punishments));
+            
+            document.getElementById('punishmentForm').reset();
+            loadPunishments();
+        }
+
+        function loadPunishments() {
+            const tbody = document.getElementById('punishmentsList');
+            tbody.innerHTML = '';
+
+            punishments.forEach(punishment => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${new Date(punishment.created_at).toLocaleString()}</td>
+                    <td>${punishment.player_name}</td>
+                    <td>${punishment.punishment_type}</td>
+                    <td>${punishment.reason}</td>
+                    <td>${punishment.staff_member}</td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+
+        // Load punishments when page loads
+        loadPunishments();
+    </script>
+</body>
+</html> 
