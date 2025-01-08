@@ -1,0 +1,81 @@
+:root {
+    --dark-red: #8B0000;
+    --light-red: #FF4444;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: var(--light-red);
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #fff;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--light-red);
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+button:hover {
+    background-color: #ff6666;
+}
+
+.header {
+    margin-bottom: 30px;
+}
+
+.punishment-form {
+    background-color: var(--dark-red);
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+.punishment-list {
+    background-color: var(--dark-red);
+    padding: 20px;
+    border-radius: 5px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--light-red);
+}
+
+th {
+    background-color: rgba(255, 68, 68, 0.2);
+} 
